@@ -79,16 +79,41 @@ function FirstPage() {
 }
 function SecondPage() {
   return (
-    <RevealWrapper className="load-hidden">
-      <h2 className="px-6 py-2">
-        Unlocking the Secrets of Effective Communication: Building a Strong
-        Foundation
-      </h2>
-      <div className="px-6 py-2 text-xl">
-        Our journey starts with understanding the core elements of effective
-        communication. Here are some key aspects to focus on:
-      </div>
-    </RevealWrapper>
+    <>
+      <Navbar />
+      <RevealWrapper className="load-hidden">
+        <h2 className="p-6">
+          Unlocking the Secrets of Effective Communication: Building a Strong
+          Foundation
+        </h2>
+        <div className="px-6 text-xl leading-loose">
+          Our journey starts with understanding the core elements of effective
+          communication. Here are some key aspects to focus on:
+          <ul>
+            <li>
+              Clarity: Express your ideas in a simple, concise manner. Avoid
+              jargon and technical terms that might confuse your audience.
+            </li>
+            <li>
+              Active Listening: Pay close attention to what the other person is
+              saying, both verbally and nonverbally. Ask clarifying questions to
+              ensure understanding.
+            </li>
+            <li>
+              Empathy: Try to see things from the other person&apos;s
+              perspective. This fosters trust and creates a more open
+              communication environment.
+            </li>
+            <li>
+              Body Language: Maintain good eye contact, use open body language
+              (avoid crossed arms), and project your voice confidently.
+              Nonverbal cues can significantly impact how your message is
+              received.
+            </li>
+          </ul>
+        </div>
+      </RevealWrapper>
+    </>
   );
 }
 
@@ -105,23 +130,26 @@ function QuestionPart() {
 
   return (
     <>
-      <div className="load-hidden p-2 flex flex-col h-screen justify-between">
+      <div className="load-hidden flex flex-col h-screen">
         <RevealWrapper>
-          <div className=" text-slate-600">
+          <Navbar />
+        </RevealWrapper>
+        <RevealWrapper className="p-6">
+          <div className=" text-bw-darkest/50 mb-2 font-bold">
             Question: Importance of Communication
           </div>
           <h1 className="">
             Why is effective communication important according to the passage?
           </h1>
         </RevealWrapper>
-        {/* <RevealWrapper>
-                <Image src="/sheets.png" width={400} height={400} alt="photo" />
-              </RevealWrapper> */}
+        {/* <RevealWrapper className="p-6 rounded-2xl">
+        <Image src={image} width={400} height={400} alt="photo" />
+      </RevealWrapper> */}
         {/* grid 2x2 */}
         <RevealList
           interval={60}
           delay={300}
-          className="grid grid-cols-2 gap-4 mb-24"
+          className="grid grid-cols-2 gap-4 p-6"
         >
           <div className="h-full w-full load-hidden">
             <AnswerOption>
