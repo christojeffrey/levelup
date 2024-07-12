@@ -27,7 +27,7 @@ export default function JobSkills({ params }: { params: { id: string } }) {
         <Graph json={json} />
       </div>
       <div className="">
-        <div className="flex gap-4 max-w-full overflow-x-scroll p-6 fixed bottom-0">
+        <div className="flex gap-4 max-w-full overflow-x-scroll p-6 fixed bottom-0 border-t-2 border-bw-main">
           <Image
             src="/badges/excel-before.png"
             alt="internet"

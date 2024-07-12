@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import { useRouter } from "next/navigation";
 export default function Graph({ json }) {
@@ -12,7 +12,12 @@ export default function Graph({ json }) {
     const height = ref.current.clientHeight;
     // set the dimensions and margins of the graph
     // append the svg object to the body of the page
-    const svg = d3.select(ref.current).append("svg").attr("width", width).attr("height", height).append("g");
+    const svg = d3
+      .select(ref.current)
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .append("g");
     // Let's list the force we wanna apply on the network
 
     // Initialize the links
@@ -46,12 +51,12 @@ export default function Graph({ json }) {
         .style("fill", (d: any) => {
           // if inside done list, make it green
           if (doneList.includes(d.id)) {
-            return "green";
+            return "#F69834";
           }
-          return "white";
+          return "#FCFAEE";
         })
-        .attr("stroke", "black")
-        .attr("stroke-width", 2)
+        .attr("stroke", "#F69834")
+        .attr("stroke-width", 4)
         .on("mousedown", (e, d: any) => {
           console.log(d);
           // window.location.href  = d.link;
