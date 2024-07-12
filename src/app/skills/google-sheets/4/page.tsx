@@ -13,8 +13,7 @@ const story = [
   },
   {
     imageSrc: "/comic-2.png",
-    description:
-      "One day, Sarah asks you to prepare a financial report for a potential investor. She provides you with all the necessary data, including sales figures, expenses, and profit margins.",
+    description: "One day, Sarah asks you to prepare a financial report for a potential investor. She provides you with all the necessary data, including sales figures, expenses, and profit margins.",
   },
   {
     imageSrc: "/comic-3.png",
@@ -28,13 +27,11 @@ const story = [
     answerOptions: [
       {
         text: "You correct the miscategorized expense and inform Sarah about the mistake, providing her with the accurate financial report.",
-        outcome:
-          " This demonstrates your honesty and commitment to providing accurate information, even if it means additional work and potentially disappointing your boss with the initial error discovery.",
+        outcome: " This demonstrates your honesty and commitment to providing accurate information, even if it means additional work and potentially disappointing your boss with the initial error discovery.",
       },
       {
         text: "You decide to leave the expense as it is, thinking it might be better to present a more favorable report to the investor.",
-        outcome:
-          "This choice compromises your integrity as it involves knowingly presenting inaccurate information, which could lead to serious consequences if discovered later.",
+        outcome: "This choice compromises your integrity as it involves knowingly presenting inaccurate information, which could lead to serious consequences if discovered later.",
       },
     ],
   },
@@ -43,13 +40,11 @@ const story = [
 const answerOptions = [
   {
     text: "You correct the miscategorized expense and inform Sarah about the mistake, providing her with the accurate financial report.",
-    outcome:
-      " This demonstrates your honesty and commitment to providing accurate information, even if it means additional work and potentially disappointing your boss with the initial error discovery.",
+    outcome: " This demonstrates your honesty and commitment to providing accurate information, even if it means additional work and potentially disappointing your boss with the initial error discovery.",
   },
   {
     text: "You decide to leave the expense as it is, thinking it might be better to present a more favorable report to the investor.",
-    outcome:
-      "This choice compromises your integrity as it involves knowingly presenting inaccurate information, which could lead to serious consequences if discovered later.",
+    outcome: "This choice compromises your integrity as it involves knowingly presenting inaccurate information, which could lead to serious consequences if discovered later.",
   },
 ];
 
@@ -68,20 +63,8 @@ function StoryRenderer({ currentStory, onNext, setAnswer, answer }) {
             duration: 0.5,
           }}
         >
-          <Image
-            src={story[currentStory].imageSrc}
-            alt="Comic Illustration"
-            width={400}
-            height={300}
-            className="rounded-2xl object-cover my-4"
-          />
-          <p
-            className={`${
-              story[currentStory].answerOptions ? "mb-4" : "min-h-60"
-            } font-sans`}
-          >
-            {story[currentStory].description}
-          </p>
+          <Image src={story[currentStory].imageSrc} alt="Comic Illustration" width={400} height={300} className="rounded-2xl object-cover my-4" />
+          <p className={`${story[currentStory].answerOptions ? "mb-4" : "min-h-60"} font-sans`}>{story[currentStory].description}</p>
         </motion.div>
         {story[currentStory].answerOptions && (
           <motion.div
@@ -95,24 +78,8 @@ function StoryRenderer({ currentStory, onNext, setAnswer, answer }) {
               duration: 0.5,
             }}
           >
-            <h2 className="text-lg text-center font-sans font-bold">
-              What will you do?
-            </h2>
-            <div className="flex flex-col gap-2 mt-2 mb-2">
-              {answerOptions.map((option, index) => (
-                <button
-                  key={index}
-                  className={`${
-                    answer === index ? "border-green-main" : "border-bw-darker"
-                  } border-2 rounded-2xl px-4 py-2 text-left`}
-                  onClick={() => {
-                    setAnswer(index);
-                  }}
-                >
-                  {option.text}
-                </button>
-              ))}
-            </div>
+            <Image src={story[currentStory].imageSrc} alt="Comic Illustration" width={400} height={300} className="rounded-2xl object-cover" />
+            <p className="animate-in">{story[currentStory].description}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -187,13 +154,7 @@ export default function Page() {
           <section className="flex flex-1 flex-col justify-center">
             <h1 className="text-2xl text-center">Well done!</h1>
             <div className="w-full flex items-center justify-center my-12">
-              <Image
-                src="/badges/integrity-check.png"
-                alt="a sparkly vibrant orange badge with a big check mark"
-                className="object-contain"
-                width={160}
-                height={160}
-              />
+              <Image src="/badges/integrity-check.png" alt="a sparkly vibrant orange badge with a big check mark" className="object-contain" width={160} height={160} />
             </div>
             <p className="font-sans">{answerOptions[answer].outcome}</p>
           </section>

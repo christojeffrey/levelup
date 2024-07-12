@@ -1,29 +1,40 @@
 "use client";
 import { RevealList, RevealWrapper } from "next-reveal";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
-const ranks = [
+let ranksDefault = [
   { name: "John Doe", score: 100 },
-  { name: "Jane Doe", score: 90 },
   { name: "John Smith", score: 80 },
-  { name: "Jane Smith", score: 70 },
   { name: "John Johnson", score: 60 },
-  { name: "Jane Johnson", score: 50 },
   { name: "John Williams", score: 40 },
-  { name: "Jane Williams", score: 30 },
   { name: "John Brown", score: 20 },
-  { name: "Jane Brown", score: 10 },
 ];
 
 export default function Leaderboard() {
   const router = useRouter();
   const [currentRank, setCurrentRank] = useState(0);
   const queryParams = useSearchParams();
+  const [ranks, setRanks] = useState(ranksDefault);
 
   const add = queryParams.get("add");
   const redirect = queryParams.get("redirect");
+
+  useEffect(() => {
+    // timeout
+
+    // reorder
+    let myScore = parseInt(localStorage.getItem("score")) || 0;
+    if (add) {
+      myScore += parseInt(add);
+    }
+
+    // reoder
+    let newRanks = [...ranks, { name: "You", score: myScore }];
+    newRanks.sort((a, b) => b.score - a.score);
+    setRanks(newRanks);
+  }, []);
 
   return (
     <main className="my-2 mx-4">
@@ -39,9 +50,9 @@ export default function Leaderboard() {
           </div>
         </div>
       </RevealWrapper>
-      <RevealList interval={60} delay={500}>
+      <div>
         <section className="flex flex-1 justify-center mt-3">
-          <ul className="flex flex-col gap-3 justify-center w-4/5">
+          <div className="flex flex-col gap-3 justify-center w-4/5">
             {ranks.map((rank, index) => {
               let className = "";
               if (index === currentRank) {
@@ -52,19 +63,19 @@ export default function Leaderboard() {
                 className = `bg-[#76BFA1] scale-[1.05]`;
               }
               return (
-                <li key={index} className={`flex rounded-2xl px-4 py-3 flex-row align-middle justify-between ${className === "" ? "bg-[#E6E4D7]" : className}`}>
+                <RevealWrapper delay={index * 100} key={index} className={`flex rounded-2xl px-4 py-3 flex-row align-middle justify-between ${className === "" ? "bg-[#E6E4D7]" : className}`}>
                   <span className="flex flex-row align-middle">
                     <span className="my-auto mr-2">{index + 1}</span>
                     <img src="/profile.webp" width={32} height={32} className="rounded-full mr-1"></img>
                     <span className="my-auto">{rank.name}</span>
                   </span>
                   <span className="my-auto">{rank.score}</span>
-                </li>
+                </RevealWrapper>
               );
             })}
-          </ul>
+          </div>
         </section>
-      </RevealList>
+      </div>
       {/* if has redirect, add continue button */}
       {redirect && (
         <div className="">
