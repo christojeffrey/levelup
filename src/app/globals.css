@@ -7,6 +7,14 @@
   src: url("/fonts/BohemianSoul-Regular.otf");
 }
 
+html {
+  font-family: var(--font-poppins), sans-serif;
+}
+
+.font-sans {
+  font-family: var(--font-poppins), sans-serif;
+}
+
 h1,
 h2,
 h3 {
