@@ -37,7 +37,7 @@ export default function Leaderboard() {
   }, []);
 
   return (
-    <main className="my-2 mx-4">
+    <main className="py-2 px-4 flex flex-col justify-between h-screen">
       <RevealWrapper>
         <a className="text-bold" href={`/`}>
           &lt;
@@ -50,7 +50,7 @@ export default function Leaderboard() {
           </div>
         </div>
       </RevealWrapper>
-      <div>
+      <div className="flex-1">
         <section className="flex flex-1 justify-center mt-3">
           <div className="flex flex-col gap-3 justify-center w-4/5">
             {ranks.map((rank, index) => {

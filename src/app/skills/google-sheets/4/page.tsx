@@ -125,13 +125,7 @@ export default function Page() {
         )}
         {/* {answerSection && (
           <section className="flex flex-grow flex-col justify-center">
-            <Image
-              src={story[3].imageSrc}
-              alt="Comic Illustration"
-              width={400}
-              height={300}
-              className="rounded-2xl object-cover my-4"
-            />
+            <Image src={story[3].imageSrc} alt="Comic Illustration" width={400} height={300} className="rounded-2xl object-cover my-4" />
             <h2 className="text-lg text-center">What will you do?</h2>
             <div className="flex flex-row">
               {answerOptions.map((option, index) => (

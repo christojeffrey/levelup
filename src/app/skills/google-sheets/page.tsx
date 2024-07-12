@@ -1,6 +1,5 @@
 "use client";
 import Graph from "@/app/_components/graph";
-import { useState } from "react";
 
 let json: any = {
   nodes: [
