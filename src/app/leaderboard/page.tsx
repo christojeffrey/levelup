@@ -29,6 +29,8 @@ export default function Leaderboard() {
       myScore += parseInt(add);
     }
 
+    localStorage.setItem("score", myScore.toString());
+
     // reoder
     let newRanks = [...ranks, { name: "You", score: myScore }];
     newRanks.sort((a, b) => b.score - a.score);
@@ -92,7 +94,7 @@ export default function Leaderboard() {
       </div>
       {/* if has redirect, add continue button */}
       {redirect && (
-        <div className="p-6 sticky bottom-6">
+        <div className="p-6 sticky bottom-0">
           <Button
             className="w-full mt-4"
             onClick={() => {

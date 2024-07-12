@@ -7,6 +7,7 @@ import { getAnswer } from "./actions";
 import { RotateCw } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Navbar } from "@/components/ui/navbar";
+import { RevealWrapper } from "next-reveal";
 
 // Force the page to be dynamic and allow streaming responses up to 30 seconds
 export const dynamic = "force-dynamic";
@@ -18,7 +19,7 @@ export default function Page() {
   const [generation, setGeneration] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const [answered, isAnswered] = useState<boolean>(true);
+  const [answered, isAnswered] = useState<boolean>(false);
 
   if (answered) {
     return (
@@ -26,8 +27,12 @@ export default function Page() {
         <Navbar />
         <div className="flex-1 flex flex-col w-full p-6 justify-between">
           <div className="flex-1 flex flex-col w-full">
-            <h2>Feedback</h2>
-            <p>{generation}</p>
+            <RevealWrapper className="load-hidden">
+              <h2>Feedback</h2>
+            </RevealWrapper>
+            <RevealWrapper className="load-hidden mt-4">
+              <p className="leading-loose">{generation}</p>
+            </RevealWrapper>
           </div>
           <Button
             onClick={() => {
