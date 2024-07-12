@@ -1,6 +1,8 @@
 import type { Config } from "tailwindcss";
 
 const config = {
+  // custom add safelist
+  safelist: ["bg-[#809B5E]", "bg-[#60AA70]"],
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
