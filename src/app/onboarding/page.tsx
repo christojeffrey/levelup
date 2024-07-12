@@ -41,7 +41,7 @@ export default function OnBoarding() {
     );
   }
   return (
-    <div className="min-h-screen mx-auto flex flex-col justify-between bg-[#FCFAEE]">
+    <div className="min-h-screen mx-auto flex flex-col justify-between bg-bw-light">
       <question.component
         onDone={() => {
           if (questionIndex === onBoardingQuestions.length - 1) {
