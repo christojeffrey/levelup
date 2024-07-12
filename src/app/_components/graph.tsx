@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 export default function Graph({ json }) {
   const ref = useRef(null);
-
   useEffect(() => {
+    const doneList = localStorage.getItem("done-list") || [];
     const width = ref.current.clientWidth;
     const height = ref.current.clientHeight;
     // set the dimensions and margins of the graph
@@ -29,20 +29,6 @@ export default function Graph({ json }) {
         .attr("x2", (d) => d.target.x)
         .attr("y2", (d) => d.target.y);
 
-      // Initialize the nodes
-      //   const enterNode = nodes
-      //     .data(json.nodes)
-      //     .enter()
-      //     .append("g")
-      //     .append("circle")
-      //     .attr("class", "node")
-      //     .attr("cx", (d) => {
-      //       return d.x;
-      //     })
-      //     .attr("cy", (d) => d.y)
-      //     .attr("r", 20)
-      //     .style("fill", "#69b3a2");
-
       // add gif /fire.gif
       const enterNodeContainer = nodes
         .data(json.nodes)
@@ -52,9 +38,36 @@ export default function Graph({ json }) {
         .attr("transform", (d) => `translate(${d.x},${d.y})`);
 
       // add circle
-      enterNodeContainer.append("circle").attr("r", 20).style("fill", "#69b3a2");
-      //   add fire
-      enterNodeContainer.append("image").attr("xlink:href", "/fire.gif").attr("x", -20).attr("y", -20).attr("width", 40).attr("height", 40);
+      enterNodeContainer
+        .append("circle")
+        .attr("r", 40)
+        .style("fill", (d: any) => {
+          // if inside done list, make it green
+          if (doneList.includes(d.id)) {
+            return "green";
+          }
+          return "white";
+        })
+        .attr("stroke", "black")
+        .attr("stroke-width", 2)
+        .on("click", (e, d: any) => {
+          // console.log(d);
+          window.location.href = d.link;
+        });
+      //   add image if it has source
+
+      enterNodeContainer
+        .append("image")
+        .attr("xlink:href", (d: any) => {
+          if (d.source) {
+            return d.source;
+          }
+          // return "";
+        })
+        .attr("x", -20)
+        .attr("y", -20)
+        .attr("width", 40)
+        .attr("height", 40);
 
       nodes = nodes.merge(enterNodeContainer);
       links = links.merge(enterLink);
@@ -72,7 +85,7 @@ export default function Graph({ json }) {
             }) // This provide  the id of a node
             .links(json.links) // and this the list of links
         )
-        .force("charge", d3.forceManyBody().strength(-400)) // This adds repulsion between nodes. Play with the -400 for the repulsion strength
+        .force("charge", d3.forceManyBody().strength(-800)) // This adds repulsion between nodes. Play with the -400 for the repulsion strength
         .force("center", d3.forceCenter(width / 2, height / 2)) // This force attracts nodes to the center of the svg area
         .on("tick", () => {
           ticked(simulation.alpha(), json.links, links, nodes);

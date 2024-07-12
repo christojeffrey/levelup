@@ -1,5 +1,6 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 const ranks = [
@@ -16,6 +17,7 @@ const ranks = [
 ];
 
 export default function Leaderboard() {
+  const router = useRouter();
   const [currentRank, setCurrentRank] = useState(0);
   const queryParams = useSearchParams();
 
@@ -58,6 +60,19 @@ export default function Leaderboard() {
           })}
         </ul>
       </section>
+      {/* if has redirect, add continue button */}
+      {redirect && (
+        <div className="">
+          <Button
+          className="w-full mt-4"
+            onClick={() => {
+              router.push(redirect);
+            }}
+          >
+            Continue
+          </Button>
+        </div>
+      )}
     </main>
   );
 }
