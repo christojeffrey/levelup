@@ -10,7 +10,12 @@ export default function Page() {
   function handleRightAnswer() {
     if (page === 3) {
       console.log("done");
-      router.push("/leaderboard?add=200&redirect=/");
+      // add done list to local storage
+      // get the prevoius
+      const doneList = JSON.parse(localStorage.getItem("done-list")) || [];
+      doneList.push("Basic Questions");
+      localStorage.setItem("done-list", JSON.stringify(doneList));
+      router.push("/leaderboard?add=200&redirect=/skills/google-sheets");
       return;
     }
     setPage(page + 1);
