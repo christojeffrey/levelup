@@ -33,7 +33,7 @@ export default function JobSkills({ params }: { params: { id: string } }) {
             className="object-contain object-top"
           />
         </div>
-        <div className="p-6 z-10 relative">
+        <div className="p-6 z-10 absolute">
           <h1 className="mb-2">Spreadsheets</h1>
           <p>
             Learn to organize data, create reports, and use essential tools to
