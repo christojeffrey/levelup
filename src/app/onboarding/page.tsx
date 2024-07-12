@@ -36,7 +36,7 @@ export default function OnBoarding() {
     return (
       <RevealWrapper className="load-hidden h-screen bg-white flex flex-col justify-center items-center">
         <div className="loader-dot"></div>
-        <div>finding the best occupation suited for you</div>
+        <div>Finding the best occupation suited for you...</div>
       </RevealWrapper>
     );
   }
