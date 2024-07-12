@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { Progress } from "@/components/ui/progress";
 
 const onBoardingQuestions = [
   {
@@ -24,6 +25,7 @@ export default function OnBoarding() {
         }}
         details={question.details}
       />
+      <Progress value={(questionIndex * 100) / onBoardingQuestions.length} />
     </main>
   );
 }
