@@ -1,0 +1,37 @@
+{
+  "jobs": [
+    { "name": "Domestic Worker", "id": "dw", "nextJob": ["cs", "ca, hh, bc, fsa"] },
+    { "name": "Ojek Driver", "id": "od", "nextJob": ["sg"] },
+    { "name": "Kurir Driver", "id": "kd", "nextJob": ["sg"] },
+    { "name": "Kuli", "id": "k", "nextJob": ["sg"] },
+    { "name": "Becak", "id": "b", "nextJob": ["sg"] },
+    { "name": "Factory Worker", "id": "fw", "nextJob": ["sg"] },
+    { "name": "Minimarket Cashier", "id": "mc", "nextJob": ["sg"] },
+    { "name": "Labourer", "id": "l", "nextJob": ["sg"] },
+    { "name": "Petani Peternak", "id": "pp", "nextJob": ["sg"] },
+    { "name": "other", "id": "o", "nextJob": ["sg"] },
+    { "name": "other", "id": "o", "nextJob": ["sg"] },
+    { "name": "Customer Service", "id": "cs", "nextJob": [], "skills": ["Google Docs", "Google Sheet", "Communication Skills"] },
+    { "name": "Childcare Assistant", "id": "ca", "nextJob": [], "skills": [] },
+    { "name": "Hotel Housekeeper", "id": "hh", "nextJob": [], "skills": [] },
+    { "name": "Building Cleaner", "id": "bc", "nextJob": [], "skills": [] },
+    { "name": "Food Service Assistant", "id": "fsa", "nextJob": [], "skills": [] },
+    { "name": "Security Guard", "id": "sg", "nextJob": [], "skills": [] }
+  ],
+
+  "skills": [
+    { "name": "Google Docs", "category": "Office", "path": {} },
+    { "name": "Google Sheet", "category": "Office", "path": {} },
+    { "name": "Google Slide", "category": "Office", "path": {} },
+    { "name": "Microsoft PowerPoint", "category": "Office", "path": {} },
+    { "name": "Microsoft Words", "category": "Office", "path": {} },
+    { "name": "Microsoft Excel", "category": "Office", "path": {} },
+    { "name": "Windows 11", "category": "Deskop Environment", "path": {} },
+    { "name": "MacOS Ventura", "category": "Deskop Environment", "path": {} },
+    { "name": "Gmail", "category": "Apps", "path": {} },
+    { "name": "Teamwork", "category": "Soft Skills", "path": {} },
+    { "name": "Communication Skills", "category": "Soft Skills", "path": {} }
+  ],
+
+  "previousJobs": null
+}
