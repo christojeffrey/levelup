@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Lottie from "react-lottie-player";
 import domestic from "../../../public/lottie/cleaning-lady.json";
 import plumber from "../../../public/lottie/plumber.json";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const onBoardingQuestions = [
   {
@@ -22,13 +23,13 @@ const onBoardingQuestions = [
     },
     component: CurrentJob,
   },
+  { details: { question: "What's your current salary?" }, component: Input },
   {
     details: {
       question: "Where do you prefer to work?",
     },
     component: ThisOrThat,
   },
-  { details: { question: "What's your current salary?" }, component: Input },
 ];
 export default function OnBoarding() {
   const router = useRouter();
@@ -67,46 +68,69 @@ export default function OnBoarding() {
         )}
       </AnimatePresence>
       <div className="min-h-screen mx-auto flex flex-col justify-between bg-bw-light">
-        <question.component
-          onDone={() => {
-            if (questionIndex === onBoardingQuestions.length - 1) {
-              setIsLoading(true);
-              setTimeout(() => {
-                // redirect to /recomendatation
-                router.push("/recommendation");
-              }, 3000);
-              return;
-            }
-            setQuestionIndex(questionIndex + 1);
-          }}
-        />
+        <AnimatePresence>
+          <motion.div
+            key={questionIndex}
+            initial={{ x: "100%", opacity: 0, position: "absolute" }}
+            animate={{ x: 0, opacity: 1, position: "relative" }}
+            exit={{ x: "-100%", opacity: 0, position: "absolute" }}
+            transition={{
+              type: "spring",
+              bounce: 0,
+              duration: 0.5,
+            }}
+            className=""
+          >
+            <question.component
+              onDone={() => {
+                if (questionIndex === onBoardingQuestions.length - 1) {
+                  setIsLoading(true);
+                  setTimeout(() => {
+                    // redirect to /recomendatation
+                    router.push("/recommendation");
+                  }, 3000);
+                  return;
+                }
+                setQuestionIndex(questionIndex + 1);
+              }}
+              onPrev={() => setQuestionIndex(questionIndex - 1)}
+            />
+          </motion.div>
+        </AnimatePresence>
         <Progress value={(questionIndex * 100) / onBoardingQuestions.length} />
       </div>
     </>
   );
 }
 
-function ThisOrThat({ onDone }) {
+function ThisOrThat({ onPrev, onDone }) {
   function handleClick() {
     console.log("clicked");
     onDone();
   }
   return (
-    <div className="relative flex-1 flex flex-col justify-between overflow-clip px-6 py-6">
+    <div className="relative flex-1 h-screen flex flex-col justify-between overflow-clip px-6 py-6">
+      <div
+        className={`absolute bg-bw-main rounded-full size-96 top-56 -right-48 transition-all duration-300
+        `}
+      ></div>
+      <div
+        className={`absolute bg-bw-darker rounded-full size-64 bottom-24 -left-32 transition-all duration-300`}
+      ></div>
       <div className="flex flex-col gap-2">
         <h6 className="font-bold text-bw-darkest/50">Interests</h6>
         <h1 className="">Where would you prefer to work?</h1>
       </div>
       <div className="flex justify-around h-full">
         <div
-          className="bg-bw-light rounded-xl relative m-2 w-1/2 p-4 h-60 flex flex-col justify-center items-center border-bw-darkest/50 border-2 cursor-pointer"
+          className="bg-bw-light rounded-xl relative w-1/2 p-4 h-60 flex flex-col justify-center items-center border-bw-darkest/50 border-2 cursor-pointer"
           onClick={handleClick}
         >
           <Sofa className="" />
           <div className="absolute bottom-4 text-xl font-bold">Indoor</div>
         </div>
         <div
-          className=" bg-bw-light rounded-xl relative m-2 w-1/2 p-4 h-60 flex flex-col justify-center items-center border-bw-darkest/50 border-2 cursor-pointer"
+          className=" bg-bw-light rounded-xl relative w-1/2 p-4 h-60 flex flex-col justify-center items-center border-bw-darkest/50 border-2 cursor-pointer"
           onClick={handleClick}
         >
           <Tree className="" />
@@ -134,20 +158,47 @@ const salaries = [
   },
 ];
 
-function Input({ onDone }) {
+function Input({ onPrev, onDone }) {
   const [value, setValue] = useState("");
   function handleChange(value) {
     setValue(value);
   }
   return (
     <div className="relative flex-1 black flex flex-col justify-between overflow-clip">
-      <h1 className="">What&apos;s your current occupation?</h1>
-      <div>
-        <div className="p-8">
-          <Combobox details={salaries} onChange={handleChange} />
+      <div
+        className={`absolute bg-bw-main rounded-full size-48 top-56 -right-12 transition-all duration-300
+        `}
+      ></div>
+      <div
+        className={`absolute bg-bw-darker rounded-full size-96 bottom-36 -left-32 transition-all duration-300`}
+      ></div>
+      <div className="p-6 h-screen flex flex-col z-10">
+        <div className="flex flex-col gap-2">
+          <h6 className="font-bold text-bw-darkest/50">Current situation</h6>
+          <h1 className="">How much is your salary expectation?</h1>
         </div>
-        <div className="p-8 flex justify-end">
-          <Button onClick={onDone}>Done</Button>
+        <div className="flex-grow flex flex-col items-center justify-center gap-24">
+          <div className="w-full">
+            <h6 className="font-bold mb-4">Current salary</h6>
+            <div>
+              <Combobox details={salaries} onChange={handleChange} />
+            </div>
+          </div>
+          <div className="w-full">
+            <h6 className="font-bold mb-4">Desired salary</h6>
+            <div className="flex-grow flex items-center justify-center">
+              <Combobox details={salaries} onChange={handleChange} />
+            </div>
+          </div>
+        </div>
+        <div className="flex w-full justify-between">
+          <Button variant="secondary" onClick={onPrev}>
+            <ChevronLeft className="mr-2 -ml-3" />
+            <p>Back</p>
+          </Button>
+          <Button onClick={onDone}>
+            <p>Next</p> <ChevronRight className="-mr-3 ml-2" />
+          </Button>
         </div>
       </div>
       <div></div>
@@ -189,7 +240,6 @@ function CurrentJob({ onDone }) {
 
   useEffect(() => {
     // change color based on value
-    // TODO: @feli - change it to the color that you seem fitting
     if (value === "Domestic Worker") {
       setColor1("#3C7A6F");
       setColor2("#52988D");
@@ -214,7 +264,7 @@ function CurrentJob({ onDone }) {
   }, [value]);
 
   return (
-    <div className="relative flex-1 h-screen black flex flex-col justify-between overflow-clip">
+    <div className="relative flex-1 h-[calc(100vh-10px)] max-h-screen black flex flex-col justify-between overflow-clip">
       <div
         className={`absolute rounded-full size-96 top-56 -right-48 transition-all duration-300
         `}
@@ -224,12 +274,12 @@ function CurrentJob({ onDone }) {
         className={`absolute rounded-full size-64 bottom-24 -left-32 transition-all duration-300`}
         style={{ backgroundColor: color2 }}
       ></div>
-      <div className="relative z-10 p-6 flex flex-col min-h-full">
+      <div className="relative z-10 p-6 flex flex-col">
         <div className="flex flex-col gap-2">
           <h6 className="font-bold text-bw-darkest/50">Current situation</h6>
           <h1 className="">What&apos;s your current occupation?</h1>
         </div>
-        <div className="h-full mt-24">
+        <div className="mt-24">
           <AnimatePresence>
             <motion.div
               key={value}
@@ -262,7 +312,9 @@ function CurrentJob({ onDone }) {
           defaultValue={value}
         />
         <div className="">
-          <Button onClick={onDone}>Next</Button>
+          <Button onClick={onDone}>
+            <p>Next</p> <ChevronRight className="-mr-3 ml-2" />
+          </Button>
         </div>
       </div>
     </div>

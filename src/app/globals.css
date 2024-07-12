@@ -7,7 +7,8 @@
   src: url("/fonts/BohemianSoul-Regular.otf");
 }
 
-html {
+html,
+p {
   font-family: var(--font-poppins), sans-serif;
 }
 
@@ -69,11 +70,6 @@ h5 {
 
 h6 {
   font-size: 16px;
-}
-
-p {
-  font-family: "Poppins";
-  font-size: medium;
 }
 
 @layer base {
