@@ -1,7 +1,8 @@
 "use client";
-import { useSearchParams } from "next/navigation";
 import { RevealList, RevealWrapper } from "next-reveal";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const ranks = [
   { name: "John Doe", score: 100 },
@@ -17,6 +18,7 @@ const ranks = [
 ];
 
 export default function Leaderboard() {
+  const router = useRouter();
   const [currentRank, setCurrentRank] = useState(0);
   const queryParams = useSearchParams();
 
@@ -37,39 +39,23 @@ export default function Leaderboard() {
           </div>
         </div>
       </RevealWrapper>
-      <RevealList  interval={60} delay={500}>
+      <RevealList interval={60} delay={500}>
         <section className="flex flex-1 justify-center mt-3">
           <ul className="flex flex-col gap-3 justify-center w-4/5">
             {ranks.map((rank, index) => {
               let className = "";
               if (index === currentRank) {
                 className = `bg-[#3C7A6F] scale-[1.15]`;
-              } else if (
-                index - 1 === currentRank ||
-                index + 1 === currentRank
-              ) {
+              } else if (index - 1 === currentRank || index + 1 === currentRank) {
                 className = `bg-[#52988D] scale-[1.10]`;
-              } else if (
-                index - 2 === currentRank ||
-                index + 2 === currentRank
-              ) {
+              } else if (index - 2 === currentRank || index + 2 === currentRank) {
                 className = `bg-[#76BFA1] scale-[1.05]`;
               }
               return (
-                <li
-                  key={index}
-                  className={`flex rounded-2xl px-4 py-3 flex-row align-middle justify-between ${
-                    className === "" ? "bg-[#E6E4D7]" : className
-                  }`}
-                >
+                <li key={index} className={`flex rounded-2xl px-4 py-3 flex-row align-middle justify-between ${className === "" ? "bg-[#E6E4D7]" : className}`}>
                   <span className="flex flex-row align-middle">
                     <span className="my-auto mr-2">{index + 1}</span>
-                    <img
-                      src="/profile.webp"
-                      width={32}
-                      height={32}
-                      className="rounded-full mr-1"
-                    ></img>
+                    <img src="/profile.webp" width={32} height={32} className="rounded-full mr-1"></img>
                     <span className="my-auto">{rank.name}</span>
                   </span>
                   <span className="my-auto">{rank.score}</span>
@@ -79,6 +65,19 @@ export default function Leaderboard() {
           </ul>
         </section>
       </RevealList>
+      {/* if has redirect, add continue button */}
+      {redirect && (
+        <div className="">
+          <Button
+            className="w-full mt-4"
+            onClick={() => {
+              router.push(redirect);
+            }}
+          >
+            Continue
+          </Button>
+        </div>
+      )}
     </main>
   );
 }
