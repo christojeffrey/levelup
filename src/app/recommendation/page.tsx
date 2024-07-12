@@ -11,7 +11,7 @@ export default function Recommendation() {
       {/* title */}
       <div>You&apos;re gonna be so good at being a</div>
       <div className="text-3xl">Virtual Assistant</div>
-      <DotLottieReact src="/lottie/cleaning-lady.lottie" loop autoplay />
+      <DotLottieReact src="/lottie/test.lottie" loop autoplay />
       {/* salary */}
       <div>Rp 50.000- 80.000/hr</div>
       {/* image */}

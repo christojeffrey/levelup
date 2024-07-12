@@ -1,4 +1,5 @@
 "use client";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 const ranks = [
@@ -16,10 +17,16 @@ const ranks = [
 
 export default function Leaderboard() {
   const [currentRank, setCurrentRank] = useState(0);
+  const queryParams = useSearchParams();
+
+  const add = queryParams.get("add");
+  const redirect = queryParams.get("redirect");
+
   return (
     <main className="my-2 mx-4">
-        <RevealWrapper></RevealWrapper>
-      <a className="text-bold" href={`/`}>&lt;</a>
+      <a className="text-bold" href={`/`}>
+        &lt;
+      </a>
       <div>
         <h1 className="text-bold text-2xl mx-2 my-2">Leaderboard</h1>
         <div className="mx-2 flex flex-row align-middle gap-3 my-2">
@@ -39,20 +46,10 @@ export default function Leaderboard() {
               className = `bg-[#76BFA1] scale-[1.05]`;
             }
             return (
-              <li
-                key={index}
-                className={`flex rounded-2xl px-4 py-3 flex-row align-middle justify-between ${
-                  className === "" ? "bg-[#E6E4D7]" : className
-                }`}
-              >
+              <li key={index} className={`flex rounded-2xl px-4 py-3 flex-row align-middle justify-between ${className === "" ? "bg-[#E6E4D7]" : className}`}>
                 <span className="flex flex-row align-middle">
                   <span className="my-auto mr-2">{index + 1}</span>
-                  <img
-                    src="/profile.webp"
-                    width={32}
-                    height={32}
-                    className="rounded-full mr-1"
-                  ></img>
+                  <img src="/profile.webp" width={32} height={32} className="rounded-full mr-1"></img>
                   <span className="my-auto">{rank.name}</span>
                 </span>
                 <span className="my-auto">{rank.score}</span>
