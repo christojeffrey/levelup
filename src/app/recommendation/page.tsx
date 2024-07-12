@@ -2,6 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import Lottie from "react-lottie-player";
+import va from "/lottie/va.json";
 
 export default function Recommendation() {
   return (
