@@ -54,7 +54,7 @@ function QuestionOne({ onDone }) {
     </div>
   );
 }
-function AnswerOption({ children, onClick = () => {} }) {
+export function AnswerOption({ children, onClick = () => {} }) {
   return (
     <div onClick={onClick} className="hover:border-green-500 border-2 border-black rounded-xl bg-slate-100 p-4">
       {children}
