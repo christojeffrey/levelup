@@ -22,8 +22,6 @@ export default function Leaderboard() {
   const redirect = queryParams.get("redirect");
 
   useEffect(() => {
-    // timeout
-
     // reorder
     let myScore = parseInt(localStorage.getItem("score")) || 0;
     if (add) {
@@ -82,7 +80,21 @@ export default function Leaderboard() {
           <Button
             className="w-full mt-4"
             onClick={() => {
-              router.push(redirect);
+              // check if localstorage done-list is completed. if yes, direct to /badges/google-sheets
+              let previousDoneList = JSON.parse(localStorage.getItem("done-list")) || [];
+              const completedDoneList = ["Readings", "Video", "Case Study", "Comic", "Basic Questions"];
+              // if previous done list as same as completed done list, then redirect to /badges/google-sheets
+              let isCompleted = true;
+              completedDoneList.forEach((item) => {
+                if (!previousDoneList.includes(item)) {
+                  isCompleted = false;
+                }
+              });
+              if (isCompleted) {
+                router.push("/badges/google-sheets");
+              } else {
+                router.push(redirect);
+              }
             }}
           >
             Continue
