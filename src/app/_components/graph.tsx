@@ -12,7 +12,12 @@ export default function Graph({ json }) {
     const height = ref.current.clientHeight;
     // set the dimensions and margins of the graph
     // append the svg object to the body of the page
-    const svg = d3.select(ref.current).append("svg").attr("width", width).attr("height", height).append("g");
+    const svg = d3
+      .select(ref.current)
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .append("g");
     // Let's list the force we wanna apply on the network
 
     // Initialize the links
@@ -50,8 +55,8 @@ export default function Graph({ json }) {
           }
           return "#FCFAEE";
         })
-        .attr("stroke", "black")
-        .attr("stroke-width", 2)
+        .attr("stroke", "#F69834")
+        .attr("stroke-width", 4)
         .on("click", (e, d: any) => {
           console.log(d);
           router.push(d.link);
