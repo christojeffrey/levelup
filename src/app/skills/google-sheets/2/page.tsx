@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { AnswerOption } from "../1/page";
+import { RevealList, RevealWrapper } from "next-reveal";
 // reading
 export default function Page() {
   const router = useRouter();
@@ -14,20 +15,9 @@ export default function Page() {
     return <QuestionPart />;
   }
 
-  function handleDone() {
-    console.log("done");
-    let previousDoneLists = JSON.parse(localStorage.getItem("done-list")) || [];
-    previousDoneLists.push("Readings");
-    localStorage.setItem("done-list", JSON.stringify(previousDoneLists));
-
-    router.push("/leaderboard?add=200&redirect=/skills/google-sheets");
-  }
   return (
     <div className="flex flex-col h-screen justify-between">
-      <div>
-        <div className="flex justify-start p-2">
-          <div className="text-3xl">Reading</div>
-        </div>
+      <RevealWrapper className="load-hidden">
         {/* IIFE */}
         {(function () {
           if (page === 1) {
@@ -37,22 +27,9 @@ export default function Page() {
             return <SecondPage />;
           }
           // check understanding
-          return (
-            <>
-              <div className="p-2">
-                <div>Question... 1 ?</div>
-                {/* grid 2x2 */}
-                <div className="grid grid-cols-2 gap-4">
-                  <AnswerOption>a</AnswerOption>
-                  <AnswerOption onClick={handleDone}>b</AnswerOption>
-                  <AnswerOption>c</AnswerOption>
-                  <AnswerOption>d</AnswerOption>
-                </div>
-              </div>
-            </>
-          );
+          return <QuestionPart />;
         })()}
-      </div>
+      </RevealWrapper>
 
       <div className="flex justify-center gap-4 p-2">
         <Button
@@ -72,43 +49,61 @@ export default function Page() {
 
 function FirstPage() {
   return (
-    <div>
-      <h1 className="text-2xl font-bold">The Art of Communication: Mastering the Key to Success</h1>
-      <div className="text-xl">
+    <RevealWrapper className="load-hidden">
+      <h1 className="px-6 py-2">The Art of Communication: Mastering the Key to Success</h1>
+      <div className="px-6 py-2 text-xl">
         Communication. It's a word thrown around often, but its true importance can't be overstated. Effective communication is the cornerstone of strong relationships, successful careers, and a fulfilling life. Whether you're explaining a
         complex idea to a colleague, negotiating a deal with a client, or simply catching up with a friend, clear and confident communication is essential for getting your point across and achieving your goals. The good news? Communication
         is a skill, and like any skill, it can be learned and improved. This article equips you with the tools and resources to become a more effective communicator in any situation.
       </div>
-    </div>
+    </RevealWrapper>
   );
 }
 function SecondPage() {
   return (
-    <div>
-      <h2 className="text-2xl font-bold">Unlocking the Secrets of Effective Communication:</h2>
-      <h3 className="text-xl font-bold">Building a Strong Foundation</h3>
-      <div>Our journey starts with understanding the core elements of effective communication. Here are some key aspects to focus on:</div>
-    </div>
+    <RevealWrapper className="load-hidden">
+      <h2 className="px-6 py-2">Unlocking the Secrets of Effective Communication: Building a Strong Foundation</h2>
+      <div className="px-6 py-2 text-xl">Our journey starts with understanding the core elements of effective communication. Here are some key aspects to focus on:</div>
+    </RevealWrapper>
   );
 }
 
 function QuestionPart() {
   const router = useRouter();
+  function handleDone() {
+    console.log("done");
+    let previousDoneLists = JSON.parse(localStorage.getItem("done-list")) || [];
+    previousDoneLists.push("Readings");
+    localStorage.setItem("done-list", JSON.stringify(previousDoneLists));
+
+    router.push("/leaderboard?add=200&redirect=/skills/google-sheets");
+  }
+
   return (
     <>
-      test your understnding
-      <div>question ...?</div>
-      <div>
-        <div>a</div>
-        <div
-          onClick={() => {
-            router.push("/leaderboard?add=200&redirect=/skills/google-sheets");
-          }}
-        >
-          b
-        </div>
-        <div>c</div>
-        <div>d</div>
+      <div className="load-hidden p-2 flex flex-col h-screen justify-between">
+        <RevealWrapper>
+          <div className=" text-slate-600">Question: Importance of Communication</div>
+          <h1 className="">Why is effective communication important according to the passage?</h1>
+        </RevealWrapper>
+        {/* <RevealWrapper>
+                <Image src="/sheets.png" width={400} height={400} alt="photo" />
+              </RevealWrapper> */}
+        {/* grid 2x2 */}
+        <RevealList interval={60} delay={300} className="grid grid-cols-2 gap-4 mb-24">
+          <div className="h-full w-full load-hidden">
+            <AnswerOption>It is necessary only for professional success.</AnswerOption>
+          </div>
+          <div className="h-full w-full load-hidden">
+            <AnswerOption onClick={handleDone}>It helps in explaining complex ideas and negotiating deals.</AnswerOption>
+          </div>
+          <div className="h-full w-full load-hidden">
+            <AnswerOption>It cannot be learned or improved.</AnswerOption>
+          </div>
+          <div className="h-full w-full load-hidden">
+            <AnswerOption>It is important only in personal relationships.</AnswerOption>
+          </div>
+        </RevealList>
       </div>
     </>
   );
