@@ -1,11 +1,15 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 export default function Recommendation() {
   return (
     <>
       {/* title */}
-      <div>You're gonna be so good at being a</div>
-      <div className="text-3xl">Customer Service Agent</div>
+      <div>You&apos;re gonna be so good at being a</div>
+      <div className="text-3xl">Virtual Assistant</div>
+      <DotLottieReact src="/lottie/cleaning-lady.lottie" loop autoplay />
       {/* salary */}
       <div>Rp 50.000- 80.000/hr</div>
       {/* image */}
