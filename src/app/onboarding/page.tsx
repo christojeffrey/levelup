@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { Progress } from "@/components/ui/progress";
 import Combobox from "@/components/ui/combobox";
+import { useRouter } from "next/navigation";
+import { RevealWrapper } from "next-reveal";
 const onBoardingQuestions = [
   {
     details: {
@@ -24,13 +26,32 @@ const onBoardingQuestions = [
   { details: { question: "What's your current salary?" }, component: Input },
 ];
 export default function OnBoarding() {
+  const router = useRouter();
   const [questionIndex, setQuestionIndex] = useState(0);
   const question = onBoardingQuestions[questionIndex];
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  if (isLoading) {
+    return (
+      <RevealWrapper className="load-hidden h-screen bg-white flex flex-col justify-center items-center">
+        <div className="loader-dot"></div>
+        <div>finding the best occupation suited for you</div>
+      </RevealWrapper>
+    );
+  }
   return (
     <div className="min-h-screen mx-auto flex flex-col justify-between bg-[#FCFAEE]">
       <question.component
         onDone={() => {
+          if (questionIndex === onBoardingQuestions.length - 1) {
+            setIsLoading(true);
+            setTimeout(() => {
+              // redirect to /recomendatation
+              router.push("/recommendation");
+            }, 3000);
+            return;
+          }
           setQuestionIndex(questionIndex + 1);
         }}
       />
