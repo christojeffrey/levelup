@@ -11,14 +11,21 @@ export default function Recommendation() {
   return (
     <div className="bg-bw-light min-h-screen p-6 flex flex-col font-sans">
       {/* title */}
-      <div className="text-bw-darkest/50 mb-8">You&apos;re gonna be a talented</div>
+      <div className="text-bw-darkest/50 mb-8">
+        You&apos;re gonna be a talented
+      </div>
       <h1>Virtual Assistant</h1>
       {/* salary */}
       <div>Rp 50.000 - 80.000/hr</div>
       <div className="flex-grow-[2]" />
       {/* image */}
       <div className="flex items-center justify-center">
-        <Lottie loop animationData={va} play style={{ width: 360, height: 360 }} />
+        <Lottie
+          loop
+          animationData={va}
+          play
+          style={{ width: 360, height: 360 }}
+        />
       </div>
       <div className="flex-grow" />
       {/* skill */}
@@ -30,11 +37,41 @@ export default function Recommendation() {
         </div>
         {/* badges */}
         <div className="flex gap-4 max-w-full overflow-x-scroll pl-4">
-          <Image src="/badges/comm.png" alt="internet" className="object-contain" width={76} height={72} />
-          <Image src="/badges/internet.png" alt="internet" className="object-contain" width={76} height={72} />
-          <Image src="/badges/word.png" alt="internet" className="object-contain" width={76} height={72} />
-          <Image src="/badges/excel-before.png" alt="internet" className="object-contain" width={76} height={72} />
-          <Image src="/badges/writing-before.png" alt="internet" className="object-contain" width={76} height={72} />
+          <Image
+            src="/badges/comm.png"
+            alt="internet"
+            className="object-contain"
+            width={76}
+            height={72}
+          />
+          <Image
+            src="/badges/internet.png"
+            alt="internet"
+            className="object-contain"
+            width={76}
+            height={72}
+          />
+          <Image
+            src="/badges/word.png"
+            alt="internet"
+            className="object-contain"
+            width={76}
+            height={72}
+          />
+          <Image
+            src="/badges/excel-before.png"
+            alt="internet"
+            className="object-contain"
+            width={76}
+            height={72}
+          />
+          <Image
+            src="/badges/writing-before.png"
+            alt="internet"
+            className="object-contain"
+            width={76}
+            height={72}
+          />
         </div>
       </div>
       {/* button */}

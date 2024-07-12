@@ -11,6 +11,32 @@ html {
   font-family: var(--font-poppins), sans-serif;
 }
 
+.bg-gr {
+  background: linear-gradient(
+    -45deg,
+    #f69834,
+    #ec5e36,
+    #a75669,
+    #3d5a92,
+    #52988d
+  );
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .font-sans {
   font-family: var(--font-poppins), sans-serif;
 }

@@ -5,6 +5,11 @@ import { Progress } from "@/components/ui/progress";
 import Combobox from "@/components/ui/combobox";
 import { useRouter } from "next/navigation";
 import { RevealWrapper } from "next-reveal";
+import { AnimatePresence, motion } from "framer-motion";
+import Lottie from "react-lottie-player";
+import domestic from "../../../public/lottie/cleaning-lady.json";
+import plumber from "../../../public/lottie/plumber.json";
+
 const onBoardingQuestions = [
   {
     details: {
@@ -32,31 +37,52 @@ export default function OnBoarding() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  if (isLoading) {
-    return (
-      <RevealWrapper className="load-hidden h-screen bg-white flex flex-col justify-center items-center">
-        <div className="loader-dot"></div>
-        <div>Finding the best occupation suited for you...</div>
-      </RevealWrapper>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <AnimatePresence>
+
+  //     </AnimatePresence>
+  //   );
+  // }
   return (
-    <div className="min-h-screen mx-auto flex flex-col justify-between bg-bw-light">
-      <question.component
-        onDone={() => {
-          if (questionIndex === onBoardingQuestions.length - 1) {
-            setIsLoading(true);
-            setTimeout(() => {
-              // redirect to /recomendatation
-              router.push("/recommendation");
-            }, 3000);
-            return;
-          }
-          setQuestionIndex(questionIndex + 1);
-        }}
-      />
-      <Progress value={(questionIndex * 100) / onBoardingQuestions.length} />
-    </div>
+    <>
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div
+            initial={{ opacity: 0, y: "-100vh" }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ y: "-100vh" }}
+            transition={{
+              type: "spring",
+              bounce: 0,
+              duration: 0.5,
+            }}
+            className="load-hidden h-screen bg-bw-light flex flex-col justify-center items-center"
+          >
+            <div className="loader-dot"></div>
+            <div className="text-bw-darkest">
+              Finding the best occupation suited for you...
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <div className="min-h-screen mx-auto flex flex-col justify-between bg-bw-light">
+        <question.component
+          onDone={() => {
+            if (questionIndex === onBoardingQuestions.length - 1) {
+              setIsLoading(true);
+              setTimeout(() => {
+                // redirect to /recomendatation
+                router.push("/recommendation");
+              }, 3000);
+              return;
+            }
+            setQuestionIndex(questionIndex + 1);
+          }}
+        />
+        <Progress value={(questionIndex * 100) / onBoardingQuestions.length} />
+      </div>
+    </>
   );
 }
 
@@ -147,58 +173,97 @@ const jobs = [
     label: "Factory Worker",
   },
   {
+    value: "Plumber",
+    label: "Plumber",
+  },
+  {
     value: "Other",
     label: "Other",
   },
 ];
 function CurrentJob({ onDone }) {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(jobs[0].label);
   const [color1, setColor1] = useState("#00000");
   const [color2, setColor2] = useState("#00000");
+  const [lottie, setLottie] = useState(domestic);
+
   useEffect(() => {
     // change color based on value
     // TODO: @feli - change it to the color that you seem fitting
     if (value === "Domestic Worker") {
-      setColor1("#809B5E");
-      setColor2("#60AA70");
+      setColor1("#3C7A6F");
+      setColor2("#52988D");
+      setLottie(domestic);
     } else if (value === "Online Taxi Driver") {
-      setColor1("#60AA70");
-      setColor2("#809B5E");
+      setColor1("#DF7C21");
+      setColor2("#F69834");
     } else if (value === "Courier Driver") {
-      setColor1("#809B5E");
-      setColor2("#60AA70");
+      setColor1("#784663");
+      setColor2("#A75669");
     } else if (value === "Factory Worker") {
-      setColor1("#60AA70");
-      setColor2("#809B5E");
+      setColor1("#CB4427");
+      setColor2("#EC5E36");
+    } else if (value === "Plumber") {
+      setColor1("#36416E");
+      setColor2("#3D5A92");
+      setLottie(plumber);
     } else {
-      setColor1("#809B5E");
-      setColor2("#60AA70");
+      setColor1("#CECBB8");
+      setColor2("#E6E4D7");
     }
   }, [value]);
 
   return (
-    <div className="relative flex-1 black flex flex-col justify-between overflow-clip">
-      <h1 className="">What&apos;s your current occupation?</h1>
+    <div className="relative flex-1 h-screen black flex flex-col justify-between overflow-clip">
       <div
-        className={`absolute bg-[${color1}] rounded-full size-96 top-56 -right-48 transition-all duration-300
+        className={`absolute rounded-full size-96 top-56 -right-48 transition-all duration-300
         `}
+        style={{ backgroundColor: color1 }}
       ></div>
       <div
-        className={`absolute bg-[${color2}] rounded-full size-64 bottom-12 -left-32 transition-all duration-300`}
+        className={`absolute rounded-full size-64 bottom-24 -left-32 transition-all duration-300`}
+        style={{ backgroundColor: color2 }}
       ></div>
-      <div className="m-2 w-1/2">
+      <div className="relative z-10 p-6 flex flex-col min-h-full">
+        <div className="flex flex-col gap-2">
+          <h6 className="font-bold text-bw-darkest/50">Current situation</h6>
+          <h1 className="">What&apos;s your current occupation?</h1>
+        </div>
+        <div className="h-full mt-24">
+          <AnimatePresence>
+            <motion.div
+              key={value}
+              initial={{ x: 300, opacity: 0, position: "absolute" }}
+              animate={{ x: 0, opacity: 1, position: "relative" }}
+              exit={{ x: -300, opacity: 0, position: "absolute" }}
+              transition={{
+                type: "spring",
+                bounce: 0,
+                duration: 0.5,
+              }}
+              className="-ml-8"
+            >
+              <Lottie
+                loop
+                animationData={lottie}
+                play
+                style={{ width: 420, height: 420 }}
+              />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+      <div className="w-full z-10 p-6 flex flex-col items-end gap-6">
         <Combobox
           details={jobs}
           onChange={(value) => {
             setValue(value);
           }}
+          defaultValue={value}
         />
-      </div>
-      <div></div>
-      <div className="mb-12 ml-auto mr-12">
-        <Button onClick={onDone} className="py-4 px-8" size="lg">
-          Next
-        </Button>
+        <div className="">
+          <Button onClick={onDone}>Next</Button>
+        </div>
       </div>
     </div>
   );
