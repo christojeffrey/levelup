@@ -7,12 +7,12 @@ export const Navbar = ({ back = true, empty = false }) => {
   const router = useRouter();
 
   if (empty) {
-    return <div className="w-full h-16" />;
+    return <div className="w-full h-16 sticky top-0" />;
   }
 
   return (
     <>
-      <nav className="flex justify-between items-center text-bw-darkest/50 relative p-4">
+      <nav className="flex justify-between items-center text-bw-darkest/50 p-4 sticky top-0 bg-bw-light z-50">
         <div className="flex gap-2">
           {back ? (
             <ChevronLeft className="h-6 w-6" onClick={() => router.back()} />

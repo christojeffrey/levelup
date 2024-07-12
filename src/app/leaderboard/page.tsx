@@ -3,6 +3,7 @@ import { RevealList, RevealWrapper } from "next-reveal";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Navbar } from "@/components/ui/navbar";
 
 let ranksDefault = [
   { name: "John Doe", score: 100 },
@@ -35,36 +36,51 @@ export default function Leaderboard() {
   }, []);
 
   return (
-    <main className="py-2 px-4 flex flex-col justify-between h-screen">
-      <RevealWrapper>
-        <a className="text-bold" href={`/`}>
-          &lt;
-        </a>
-        <div>
+    <main className="flex flex-col h-screen bg-bw-light overflow-auto">
+      <Navbar />
+      <RevealWrapper className="p-6">
+        <div className="flex justify-between">
           <h1 className="text-bold text-2xl mx-2 my-2">Leaderboard</h1>
-          <div className="mx-2 flex flex-row align-middle gap-3 my-2">
-            <div className="rounded-full w-8 h-8 bg-[#00DBCE]"></div>
-            <span className="my-auto">Diamond Tier</span>
+          <div className="flex items-center gap-3 my-2">
+            <div className="rounded-full w-8 h-8 bg-blue-light"></div>
+            <span className="">Diamond Tier</span>
           </div>
         </div>
       </RevealWrapper>
-      <div className="flex-1">
+      <div className="flex-grow">
         <section className="flex flex-1 justify-center mt-3">
           <div className="flex flex-col gap-3 justify-center w-4/5">
             {ranks.map((rank, index) => {
               let className = "";
               if (index === currentRank) {
                 className = `bg-[#3C7A6F] scale-[1.15]`;
-              } else if (index - 1 === currentRank || index + 1 === currentRank) {
+              } else if (
+                index - 1 === currentRank ||
+                index + 1 === currentRank
+              ) {
                 className = `bg-[#52988D] scale-[1.10]`;
-              } else if (index - 2 === currentRank || index + 2 === currentRank) {
+              } else if (
+                index - 2 === currentRank ||
+                index + 2 === currentRank
+              ) {
                 className = `bg-[#76BFA1] scale-[1.05]`;
               }
               return (
-                <RevealWrapper delay={index * 100} key={index} className={`flex rounded-2xl px-4 py-3 flex-row align-middle justify-between ${className === "" ? "bg-[#E6E4D7]" : className}`}>
+                <RevealWrapper
+                  delay={index * 100}
+                  key={index}
+                  className={`flex rounded-2xl px-4 py-3 flex-row align-middle justify-between ${
+                    className === "" ? "bg-[#E6E4D7]" : className
+                  }`}
+                >
                   <span className="flex flex-row align-middle">
                     <span className="my-auto mr-2">{index + 1}</span>
-                    <img src="/profile.webp" width={32} height={32} className="rounded-full mr-1"></img>
+                    <img
+                      src="/profile.webp"
+                      width={32}
+                      height={32}
+                      className="rounded-full mr-1"
+                    ></img>
                     <span className="my-auto">{rank.name}</span>
                   </span>
                   <span className="my-auto">{rank.score}</span>
@@ -76,13 +92,20 @@ export default function Leaderboard() {
       </div>
       {/* if has redirect, add continue button */}
       {redirect && (
-        <div className="">
+        <div className="p-6 sticky bottom-6">
           <Button
             className="w-full mt-4"
             onClick={() => {
               // check if localstorage done-list is completed. if yes, direct to /badges/google-sheets
-              let previousDoneList = JSON.parse(localStorage.getItem("done-list")) || [];
-              const completedDoneList = ["Readings", "Video", "Case Study", "Comic", "Basic Questions"];
+              let previousDoneList =
+                JSON.parse(localStorage.getItem("done-list")) || [];
+              const completedDoneList = [
+                "Readings",
+                "Video",
+                "Case Study",
+                "Comic",
+                "Basic Questions",
+              ];
               // if previous done list as same as completed done list, then redirect to /badges/google-sheets
               let isCompleted = true;
               completedDoneList.forEach((item) => {
