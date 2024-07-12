@@ -2,7 +2,9 @@
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import Image from "next/image";
-import { use, useState } from "react";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { image } from "d3";
 
 const story = [
   {
@@ -13,17 +15,17 @@ const story = [
   {
     imageSrc: "/comic-2.png",
     description:
-      "You are a virtual assistant working for a small business owner, Sarah, who runs an online retail store. Sarah trusts you with various tasks, including managing her inventory, handling customer inquiries, and keeping track of financial records.",
+      "One day, Sarah asks you to prepare a financial report for a potential investor. She provides you with all the necessary data, including sales figures, expenses, and profit margins.",
   },
   {
     imageSrc: "/comic-3.png",
     description:
-      "You are a virtual assistant working for a small business owner, Sarah, who runs an online retail store. Sarah trusts you with various tasks, including managing her inventory, handling customer inquiries, and keeping track of financial records.",
+      "While compiling the report, you notice that a significant expense from a recent marketing campaign was mistakenly categorized under personal costs in your previous work, which significantly increases the apparent profitability of the business.",
   },
   {
     imageSrc: "/comic-4.png",
     description:
-      "You are a virtual assistant working for a small business owner, Sarah, who runs an online retail store. Sarah trusts you with various tasks, including managing her inventory, handling customer inquiries, and keeping track of financial records.",
+      "You realize that correcting this error will show a less favorable financial position, which could negatively influence the investor's decision. However, if you don't correct it, Sarah might not notice your mistake, and the report will show a more positive financial situation",
   },
 ];
 
@@ -44,20 +46,28 @@ function StoryRenderer({ currentStory, onNext }) {
   return (
     <div className="flex flex-col flex-1 relative">
       <div className="absolute w-full h-full justify-center">
-        {story.map((_, index) => (
-          <>
+        <AnimatePresence>
+          <motion.div
+            key={story[currentStory].imageSrc}
+            initial={{ x: 300, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -300, opacity: 0, position: "absolute" }}
+            transition={{
+              type: "spring",
+              bounce: 0,
+              duration: 0.5,
+            }}
+          >
             <Image
               src={story[currentStory].imageSrc}
+              alt="Comic Illustration"
               width={400}
               height={300}
-              alt="Comic Illustration"
-              className={`transition transform ease-in duration-500 ${
-                currentStory === index ? "translate-x-0" : " -translate-x-full"
-              } self-center`}
+              className="rounded-2xl object-cover"
             />
             <p className="animate-in">{story[currentStory].description}</p>
-          </>
-        ))}
+          </motion.div>
+        </AnimatePresence>
         <Button className="self-end" onClick={onNext}>
           Next &gt;
         </Button>
@@ -75,7 +85,7 @@ export default function Page() {
   const [outcomeSection, setOutcomeSection] = useState(false);
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-bw-light">
       <nav className="text-[#24222F]/[0.5] p-3 text-bold text-sm">
         <span className="text-xl">&lt;</span> Create financial report
       </nav>
@@ -118,9 +128,7 @@ export default function Page() {
       {outcomeSection && (
         <section className="flex flex-1 flex-col justify-center">
           <h2 className="text-lg text-center">Integrity Outcome</h2>
-          <p>
-            {answerOptions[answer].outcome}
-          </p>
+          <p>{answerOptions[answer].outcome}</p>
         </section>
       )}
     </div>
