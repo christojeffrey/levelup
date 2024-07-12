@@ -66,18 +66,21 @@ function ThisOrThat({ onDone }) {
     onDone();
   }
   return (
-    <div className="relative flex-1 black flex flex-col justify-between overflow-clip">
-      <h1 className="">What&apos;s your current occupation?</h1>
+    <div className="relative flex-1 flex flex-col justify-between overflow-clip px-6 py-6">
+      <div className="flex flex-col gap-2">
+        <h6 className="font-bold text-bw-darkest/50">Interests</h6>
+        <h1 className="">Where would you prefer to work?</h1>
+      </div>
       <div className="flex justify-around h-full">
         <div
-          className="bg-[#E6E4D7] rounded-xl relative m-2 w-1/2 p-4 h-48 flex flex-col justify-center items-center border-black border-2 cursor-pointer"
+          className="bg-bw-light rounded-xl relative m-2 w-1/2 p-4 h-60 flex flex-col justify-center items-center border-bw-darkest/50 border-2 cursor-pointer"
           onClick={handleClick}
         >
           <Sofa className="" />
           <div className="absolute bottom-4 text-xl font-bold">Indoor</div>
         </div>
         <div
-          className=" bg-[#E6E4D7] rounded-xl relative m-2 w-1/2 p-4 h-48 flex flex-col justify-center items-center border-black border-2 cursor-pointer"
+          className=" bg-bw-light rounded-xl relative m-2 w-1/2 p-4 h-60 flex flex-col justify-center items-center border-bw-darkest/50 border-2 cursor-pointer"
           onClick={handleClick}
         >
           <Tree className="" />
