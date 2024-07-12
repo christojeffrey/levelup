@@ -1,13 +1,13 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -18,7 +18,56 @@ const config = {
       },
     },
     extend: {
+      screens: {
+        sm: "480px",
+        md: "768px",
+        lg: "976px",
+        "2lg": "1024px",
+        xl: "1440px",
+      },
+      fontFamily: {
+        sans: ["Poppins", "sans-serif"],
+        serif: ["Bohemian-Soul", "serif"],
+      },
       colors: {
+        transparent: "transparent",
+        yellow: {
+          darkest: "#CF6708",
+          darker: "#DF7C21",
+          main: "#F69834",
+          light: "#FFC54D",
+        },
+        orange: {
+          darkest: "#A23226",
+          darker: "#CB4427",
+          main: "#EC5E36",
+          light: "#FF8C3C",
+        },
+        purple: {
+          darkest: "#4F3B56",
+          darker: "#784663",
+          main: "#A75669",
+          light: "#FF7E90",
+        },
+        blue: {
+          darkest: "#30314D",
+          darker: "#36416E",
+          main: "#3D5A92",
+          light: "#5F90BB",
+        },
+        green: {
+          darkest: "#2C5A58",
+          darker: "#3C7A6F",
+          main: "#52988D",
+          light: "#76BFA1",
+        },
+        bw: {
+          darkest: "#24222F",
+          darker: "#CECBB8",
+          main: "#E6E4D7",
+          light: "#FCFAEE",
+        },
+        black: "#000000",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -75,6 +124,6 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default config
+export default config;
