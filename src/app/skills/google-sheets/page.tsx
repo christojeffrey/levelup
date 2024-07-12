@@ -1,6 +1,5 @@
 "use client";
 import Graph from "@/app/_components/graph";
-import { useState } from "react";
 
 let json: any = {
   nodes: [
@@ -8,7 +7,7 @@ let json: any = {
     { id: "Readings", link: "/skills/google-sheets/2" },
     { id: "Case Study", source: "/fire.gif", link: "/skills/google-sheets/3" },
     { id: "Comic", link: "/skills/google-sheets/4" },
-    { id: "Readings2", link: "/skills/google-sheets/5" },
+    { id: "Video", link: "/skills/google-sheets/5" },
   ],
   links: [
     { source: 0, target: 1 },

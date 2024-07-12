@@ -2,8 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
+import { useRouter } from "next/navigation";
 export default function Graph({ json }) {
   const ref = useRef(null);
+  const router = useRouter();
   useEffect(() => {
     const doneList = localStorage.getItem("done-list") || [];
     const width = ref.current.clientWidth;
@@ -50,9 +52,10 @@ export default function Graph({ json }) {
         })
         .attr("stroke", "black")
         .attr("stroke-width", 2)
-        .on("click", (e, d: any) => {
-          // console.log(d);
-          window.location.href = d.link;
+        .on("mousedown", (e, d: any) => {
+          console.log(d);
+          // window.location.href  = d.link;
+          router.push(d.link);
         });
       //   add image if it has source
 

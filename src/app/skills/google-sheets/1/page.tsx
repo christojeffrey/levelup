@@ -22,7 +22,7 @@ export default function Page() {
   }
 
   return (
-    <div>
+    <div className="h-screen flex flex-col justify-between">
       {(function () {
         if (page === 1) {
           return <QuestionOne onDone={handleRightAnswer} />;
@@ -35,7 +35,6 @@ export default function Page() {
         }
         return <></>;
       })()}
-      a question
       <Progress value={((page - 1) * 100) / 3} />
     </div>
   );
@@ -43,27 +42,38 @@ export default function Page() {
 
 function QuestionOne({ onDone }) {
   return (
-    <>
-      <div>Question...?</div>
-      <div>
-        <div>a</div>
-        <div onClick={onDone}>b</div>
-        <div>c</div>
-        <div>d</div>
+    <div className="p-2">
+      <div>Question... 1 ?</div>
+      {/* grid 2x2 */}
+      <div className="grid grid-cols-2 gap-4">
+        <AnswerOption>a</AnswerOption>
+        <AnswerOption onClick={onDone}>b</AnswerOption>
+        <AnswerOption>c</AnswerOption>
+        <AnswerOption>d</AnswerOption>
       </div>
-    </>
+    </div>
+  );
+}
+export function AnswerOption({ children, onClick = () => {} }) {
+  return (
+    <div onClick={onClick} className="hover:border-green-500 border-2 border-black rounded-xl bg-slate-100 p-4">
+      {children}
+    </div>
   );
 }
 
 function QuestionTwo({ onDone }) {
   return (
     <>
-      <div>Question...?</div>
-      <div>
-        <div>a</div>
-        <div onClick={onDone}>b</div>
-        <div>c</div>
-        <div>d</div>
+      <div className="p-2">
+        <div>Question 2..?</div>
+        {/* grid 2x2 */}
+        <div className="grid grid-cols-2 gap-4">
+          <AnswerOption>a</AnswerOption>
+          <AnswerOption onClick={onDone}>b</AnswerOption>
+          <AnswerOption>c</AnswerOption>
+          <AnswerOption>d</AnswerOption>
+        </div>
       </div>
     </>
   );
@@ -71,14 +81,15 @@ function QuestionTwo({ onDone }) {
 
 function QuestionThree({ onDone }) {
   return (
-    <>
-      <div>Question...?</div>
-      <div>
-        <div>a</div>
-        <div onClick={onDone}>b</div>
-        <div>c</div>
-        <div>d</div>
+    <div className="p-2">
+      <div>Question 3...?</div>
+      {/* grid 2x2 */}
+      <div className="grid grid-cols-2 gap-4">
+        <AnswerOption>a</AnswerOption>
+        <AnswerOption onClick={onDone}>b</AnswerOption>
+        <AnswerOption>c</AnswerOption>
+        <AnswerOption>d</AnswerOption>
       </div>
-    </>
+    </div>
   );
 }

@@ -4,6 +4,7 @@ import { Progress } from "@/components/ui/progress";
 import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const story = [
   {
@@ -78,8 +79,20 @@ function StoryRenderer({ currentStory, onNext, setAnswer, answer }) {
               duration: 0.5,
             }}
           >
-            <Image src={story[currentStory].imageSrc} alt="Comic Illustration" width={400} height={300} className="rounded-2xl object-cover" />
-            <p className="animate-in">{story[currentStory].description}</p>
+            <h2 className="text-lg text-center font-sans font-bold">What will you do?</h2>
+            <div className="flex flex-col gap-2 mt-2 mb-2">
+              {answerOptions.map((option, index) => (
+                <button
+                  key={index}
+                  className={`${answer === index ? "border-green-main" : "border-bw-darker"} border-2 rounded-2xl px-4 py-2 text-left`}
+                  onClick={() => {
+                    setAnswer(index);
+                  }}
+                >
+                  {option.text}
+                </button>
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -92,6 +105,7 @@ function StoryRenderer({ currentStory, onNext, setAnswer, answer }) {
 }
 
 export default function Page() {
+  const router = useRouter();
   const [currentStory, setCurrentStory] = useState(0);
   const [comicSection, setComicSection] = useState(true);
   const [answer, setAnswer] = useState(null);
@@ -125,13 +139,7 @@ export default function Page() {
         )}
         {/* {answerSection && (
           <section className="flex flex-grow flex-col justify-center">
-            <Image
-              src={story[3].imageSrc}
-              alt="Comic Illustration"
-              width={400}
-              height={300}
-              className="rounded-2xl object-cover my-4"
-            />
+            <Image src={story[3].imageSrc} alt="Comic Illustration" width={400} height={300} className="rounded-2xl object-cover my-4" />
             <h2 className="text-lg text-center">What will you do?</h2>
             <div className="flex flex-row">
               {answerOptions.map((option, index) => (
@@ -157,6 +165,14 @@ export default function Page() {
               <Image src="/badges/integrity-check.png" alt="a sparkly vibrant orange badge with a big check mark" className="object-contain" width={160} height={160} />
             </div>
             <p className="font-sans">{answerOptions[answer].outcome}</p>
+            <Button
+            onClick={()=>{
+              let previousDoneLists = JSON.parse(localStorage.getItem("done-list")) || [];
+              previousDoneLists.push("Comic");
+              localStorage.setItem("done-list", JSON.stringify(previousDoneLists));
+              router.push("/leaderboard?add=200&redirect=/skills/google-sheets");
+            }}
+            >Okay!</Button>
           </section>
         )}
       </div>
