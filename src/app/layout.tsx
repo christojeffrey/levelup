@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({ weight: ["400", "700"], subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "LevelUp",
@@ -16,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="sr">
-      <body className={`${inter.className} min-h-screen max-w-xl mx-auto`}>{children}</body>
+      <body className={`${poppins.className} min-h-screen max-w-xl mx-auto`}>
+        {children}
+      </body>
     </html>
   );
 }
