@@ -19,19 +19,51 @@ let json: any = {
 };
 
 import Image from "next/image";
+import { Navbar } from "@/components/ui/navbar";
 export default function JobSkills({ params }: { params: { id: string } }) {
   return (
-    <div className="flex flex-col h-screen min-h-full">
+    <div className="flex flex-col h-screen min-h-full bg-bw-light">
+      <Navbar back={false} />
       <div>asdf</div>
       <div className="flex-1 border-2 border-black">
         <Graph json={json} />
       </div>
       <div className="flex gap-4 max-w-full overflow-x-scroll pl-4">
-        <Image src="/badges/comm.png" alt="internet" className="object-contain" width={76} height={72} />
-        <Image src="/badges/internet.png" alt="internet" className="object-contain" width={76} height={72} />
-        <Image src="/badges/word.png" alt="internet" className="object-contain" width={76} height={72} />
-        <Image src="/badges/excel-before.png" alt="internet" className="object-contain" width={76} height={72} />
-        <Image src="/badges/writing-before.png" alt="internet" className="object-contain" width={76} height={72} />
+        <Image
+          src="/badges/comm.png"
+          alt="internet"
+          className="object-contain"
+          width={76}
+          height={72}
+        />
+        <Image
+          src="/badges/internet.png"
+          alt="internet"
+          className="object-contain"
+          width={76}
+          height={72}
+        />
+        <Image
+          src="/badges/word.png"
+          alt="internet"
+          className="object-contain"
+          width={76}
+          height={72}
+        />
+        <Image
+          src="/badges/excel-before.png"
+          alt="internet"
+          className="object-contain"
+          width={76}
+          height={72}
+        />
+        <Image
+          src="/badges/writing-before.png"
+          alt="internet"
+          className="object-contain"
+          width={76}
+          height={72}
+        />
       </div>
     </div>
   );
