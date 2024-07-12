@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { Navbar } from "@/components/ui/navbar";
+import { RevealList, RevealWrapper } from "next-reveal";
 
 const story = [
   {
@@ -14,7 +16,8 @@ const story = [
   },
   {
     imageSrc: "/comic-2.png",
-    description: "One day, Sarah asks you to prepare a financial report for a potential investor. She provides you with all the necessary data, including sales figures, expenses, and profit margins.",
+    description:
+      "One day, Sarah asks you to prepare a financial report for a potential investor. She provides you with all the necessary data, including sales figures, expenses, and profit margins.",
   },
   {
     imageSrc: "/comic-3.png",
@@ -28,11 +31,13 @@ const story = [
     answerOptions: [
       {
         text: "You correct the miscategorized expense and inform Sarah about the mistake, providing her with the accurate financial report.",
-        outcome: " This demonstrates your honesty and commitment to providing accurate information, even if it means additional work and potentially disappointing your boss with the initial error discovery.",
+        outcome:
+          " This demonstrates your honesty and commitment to providing accurate information, even if it means additional work and potentially disappointing your boss with the initial error discovery.",
       },
       {
         text: "You decide to leave the expense as it is, thinking it might be better to present a more favorable report to the investor.",
-        outcome: "This choice compromises your integrity as it involves knowingly presenting inaccurate information, which could lead to serious consequences if discovered later.",
+        outcome:
+          "This choice compromises your integrity as it involves knowingly presenting inaccurate information, which could lead to serious consequences if discovered later.",
       },
     ],
   },
@@ -41,11 +46,13 @@ const story = [
 const answerOptions = [
   {
     text: "You correct the miscategorized expense and inform Sarah about the mistake, providing her with the accurate financial report.",
-    outcome: " This demonstrates your honesty and commitment to providing accurate information, even if it means additional work and potentially disappointing your boss with the initial error discovery.",
+    outcome:
+      " This demonstrates your honesty and commitment to providing accurate information, even if it means additional work and potentially disappointing your boss with the initial error discovery.",
   },
   {
     text: "You decide to leave the expense as it is, thinking it might be better to present a more favorable report to the investor.",
-    outcome: "This choice compromises your integrity as it involves knowingly presenting inaccurate information, which could lead to serious consequences if discovered later.",
+    outcome:
+      "This choice compromises your integrity as it involves knowingly presenting inaccurate information, which could lead to serious consequences if discovered later.",
   },
 ];
 
@@ -64,8 +71,20 @@ function StoryRenderer({ currentStory, onNext, setAnswer, answer }) {
             duration: 0.5,
           }}
         >
-          <Image src={story[currentStory].imageSrc} alt="Comic Illustration" width={400} height={300} className="rounded-2xl object-cover my-4" />
-          <p className={`${story[currentStory].answerOptions ? "mb-4" : "min-h-60"} font-sans`}>{story[currentStory].description}</p>
+          <Image
+            src={story[currentStory].imageSrc}
+            alt="Comic Illustration"
+            width={400}
+            height={300}
+            className="rounded-2xl object-cover my-4"
+          />
+          <p
+            className={`${
+              story[currentStory].answerOptions ? "mb-4" : "min-h-60"
+            } font-sans`}
+          >
+            {story[currentStory].description}
+          </p>
         </motion.div>
         {story[currentStory].answerOptions && (
           <motion.div
@@ -79,12 +98,16 @@ function StoryRenderer({ currentStory, onNext, setAnswer, answer }) {
               duration: 0.5,
             }}
           >
-            <h2 className="text-lg text-center font-sans font-bold">What will you do?</h2>
+            <h2 className="text-lg text-center font-sans font-bold">
+              What will you do?
+            </h2>
             <div className="flex flex-col gap-2 mt-2 mb-2">
               {answerOptions.map((option, index) => (
                 <button
                   key={index}
-                  className={`${answer === index ? "border-green-main" : "border-bw-darker"} border-2 rounded-2xl px-4 py-2 text-left`}
+                  className={`${
+                    answer === index ? "border-green-main" : "border-bw-darker"
+                  } border-2 rounded-2xl px-4 py-2 text-left`}
                   onClick={() => {
                     setAnswer(index);
                   }}
@@ -112,32 +135,36 @@ export default function Page() {
   const [outcomeSection, setOutcomeSection] = useState(false);
 
   return (
-    <div className="flex flex-col h-full bg-bw-light">
-      <nav className="text-[#24222F]/[0.5] p-3 text-bold text-sm">
+    <div className="flex flex-col h-screen bg-bw-light">
+      <RevealWrapper className="load-hidden">
+        <Navbar />
+      </RevealWrapper>
+      {/* <nav className="text-[#24222F]/[0.5] p-3 text-bold text-sm">
         <span className="text-xl">&lt;</span> Create financial report
-      </nav>
-      <div className="p-6">
-        {comicSection && (
-          <>
-            <h1 className="text-2xl">Make a decision</h1>
-            <section className="flex flex-1 flex-col">
-              <StoryRenderer
-                currentStory={currentStory}
-                onNext={() => {
-                  if (currentStory === 3) {
-                    setComicSection(false);
-                    setOutcomeSection(true);
-                  } else {
-                    setCurrentStory((prev) => prev + 1);
-                  }
-                }}
-                setAnswer={setAnswer}
-                answer={answer}
-              />
-            </section>
-          </>
-        )}
-        {/* {answerSection && (
+      </nav> */}
+      <RevealWrapper className="load-hidden">
+        <div className="p-6">
+          {comicSection && (
+            <>
+              <h1 className="text-2xl">Make a decision</h1>
+              <section className="flex flex-1 flex-col">
+                <StoryRenderer
+                  currentStory={currentStory}
+                  onNext={() => {
+                    if (currentStory === 3) {
+                      setComicSection(false);
+                      setOutcomeSection(true);
+                    } else {
+                      setCurrentStory((prev) => prev + 1);
+                    }
+                  }}
+                  setAnswer={setAnswer}
+                  answer={answer}
+                />
+              </section>
+            </>
+          )}
+          {/* {answerSection && (
           <section className="flex flex-grow flex-col justify-center">
             <Image src={story[3].imageSrc} alt="Comic Illustration" width={400} height={300} className="rounded-2xl object-cover my-4" />
             <h2 className="text-lg text-center">What will you do?</h2>
@@ -158,24 +185,50 @@ export default function Page() {
             </div>
           </section>
         )} */}
-        {outcomeSection && (
-          <section className="flex flex-1 flex-col justify-center">
-            <h1 className="text-2xl text-center">Well done!</h1>
-            <div className="w-full flex items-center justify-center my-12">
-              <Image src="/badges/integrity-check.png" alt="a sparkly vibrant orange badge with a big check mark" className="object-contain" width={160} height={160} />
-            </div>
-            <p className="font-sans">{answerOptions[answer].outcome}</p>
-            <Button
-            onClick={()=>{
-              let previousDoneLists = JSON.parse(localStorage.getItem("done-list")) || [];
-              previousDoneLists.push("Comic");
-              localStorage.setItem("done-list", JSON.stringify(previousDoneLists));
-              router.push("/leaderboard?add=200&redirect=/skills/google-sheets");
-            }}
-            >Okay!</Button>
-          </section>
-        )}
-      </div>
+          {outcomeSection && (
+            <section className="flex flex-1 flex-col justify-center h-[calc(100vh-112px)]">
+              <RevealWrapper className="load-hidden">
+                <h1 className="text-2xl text-center">Well done!</h1>
+              </RevealWrapper>
+              <RevealWrapper className="load-hidden">
+                <div className="w-full flex items-center justify-center my-12">
+                  <Image
+                    src="/badges/integrity-check.png"
+                    alt="a sparkly vibrant orange badge with a big check mark"
+                    className="object-contain"
+                    width={160}
+                    height={160}
+                  />
+                </div>
+              </RevealWrapper>
+              <RevealWrapper>
+                <p className="font-sans flex-grow h-full">
+                  {answerOptions[answer].outcome}
+                </p>
+              </RevealWrapper>
+              <RevealWrapper className="mt-auto">
+                <Button
+                  className="sticky bottom-0 w-full"
+                  onClick={() => {
+                    let previousDoneLists =
+                      JSON.parse(localStorage.getItem("done-list")) || [];
+                    previousDoneLists.push("Comic");
+                    localStorage.setItem(
+                      "done-list",
+                      JSON.stringify(previousDoneLists)
+                    );
+                    router.push(
+                      "/leaderboard?add=200&redirect=/skills/google-sheets"
+                    );
+                  }}
+                >
+                  Okay!
+                </Button>
+              </RevealWrapper>
+            </section>
+          )}
+        </div>
+      </RevealWrapper>
     </div>
   );
 }
