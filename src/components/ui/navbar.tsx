@@ -2,9 +2,13 @@ import { ChevronDown, ChevronLeft, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export const Navbar = ({ back = true }) => {
+export const Navbar = ({ back = true, empty = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+
+  if (empty) {
+    return <div className="w-full h-16" />;
+  }
 
   return (
     <>
