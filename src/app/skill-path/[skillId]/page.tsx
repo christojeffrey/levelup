@@ -18,23 +18,6 @@ export default function SkillPath() {
   const ref = useRef(null);
 
   useEffect(() => {
-    // append a circle
-    // const size = 10;
-    // let randomNodes: any = [];
-    // // generate size nodes
-    // for (let i = 0; i < size; i++) {
-    //   randomNodes.push({ id: i });
-    // }
-
-    // let randomEdges = [];
-    // // generate size edges
-    // for (let i = 0; i < size * 10; i++) {
-    //   randomEdges.push({
-    //     source: Math.floor(Math.random() * size),
-    //     target: Math.floor(Math.random() * size),
-    //   });
-    // }
-
     // set the dimensions and margins of the graph
     const margin = { top: 10, right: 30, bottom: 30, left: 40 },
       width = 500 - margin.left - margin.right,
@@ -71,13 +54,14 @@ export default function SkillPath() {
 
     // Initialize the nodes
     const node = svg.selectAll("circle").data(json.nodes).join("circle").attr("r", 20).style("fill", "#69b3a2").call(drag(simulation));
+
     // This function is run at each iteration of the force algorithm, updating the nodes position.
     function ticked() {
-      //   var k = 6 * e.alpha;
-      //   json.links.forEach(function (d, i) {
-      //     d.source.y -= k;
-      //     d.target.y += k;
-      //   });
+      var k = 50 * simulation.alpha();
+      json.links.forEach(function (d, i) {
+        d.source.y -= k;
+        d.target.y += k;
+      });
       link
         .attr("x1", function (d: any) {
           return d.source.x;
@@ -120,6 +104,23 @@ export default function SkillPath() {
 
       return d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended);
     }
+
+    // add new node after 1 second
+    setTimeout(() => {
+      json.nodes.push({ id: "new" });
+      json.links.push({ source: 1, target: 7 });
+      simulation.nodes(json.nodes);
+      simulation.force(
+        "link",
+        d3
+          .forceLink() // This force provides links between nodes
+          .id(function (d: any) {
+            return d.index;
+          }) // This provide  the id of a node
+          .links(json.links) // and this the list of links
+      );
+      simulation.alpha(1).restart();
+    }, 1000);
   }, []);
 
   return (
