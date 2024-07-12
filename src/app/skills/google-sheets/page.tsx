@@ -23,6 +23,24 @@ export default function JobSkills({ params }: { params: { id: string } }) {
   return (
     <div className="flex flex-col h-screen min-h-full bg-bw-light">
       <Navbar back={false} />
+      {/* TITLE */}
+      <div>
+        <div className="w-full h-96 absolute">
+          <Image
+            src="/excel-bg.png"
+            alt=""
+            fill
+            className="object-contain object-top"
+          />
+        </div>
+        <div className="p-6 z-10 relative">
+          <h1 className="mb-2">Spreadsheets</h1>
+          <p>
+            Learn to organize data, create reports, and use essential tools to
+            support your clients.
+          </p>
+        </div>
+      </div>
       <div className="flex-1">
         <Graph json={json} />
       </div>

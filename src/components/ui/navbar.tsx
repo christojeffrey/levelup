@@ -29,7 +29,7 @@ export const Navbar = ({ back = true, empty = false }) => {
       <div
         className={`${
           isOpen ? "h-24" : "h-0"
-        } w-full px-4 flex flex-col gap-2 font-bold duration-500 overflow-clip absolute top-16 bg-bw-light border-b-2 border-bw-main`}
+        } w-full px-4 flex flex-col gap-2 font-bold duration-500 overflow-clip absolute top-16 bg-bw-light border-b-2 border-bw-main z-50`}
       >
         <div className="flex items-center">
           <div className="size-4 mr-3 bg-green-main ml-1" />
