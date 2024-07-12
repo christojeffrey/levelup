@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { AnswerOption } from "../1/page";
+import { Navbar } from "@/components/ui/navbar";
 // reading
 export default function Page() {
   const router = useRouter();
@@ -18,10 +19,11 @@ export default function Page() {
     router.push("/leaderboard?add=200&redirect=/skills/google-sheets");
   }
   return (
-    <div className="flex flex-col h-screen justify-between">
-      <div>
-        <div className="flex justify-start p-2">
-          <div className="text-3xl">Reading</div>
+    <div className="flex flex-col h-screen">
+      <Navbar />
+      <div className="flex flex-col p-6">
+        <div className="flex justify-start">
+          <h1 className="text-3xl mb-8">Add add-ons in Google Sheets</h1>
         </div>
         {/* IIFE */}
         {(function () {
@@ -32,7 +34,7 @@ export default function Page() {
           // check understanding
           return (
             <>
-              <div className="p-2">
+              <div className="">
                 <div>Question... 1 ?</div>
                 {/* grid 2x2 */}
                 <div className="grid grid-cols-2 gap-4">
@@ -68,7 +70,7 @@ function FirstPage() {
     <div className="mx-auto ">
       {/* youtube iframe https://www.youtube.com/watch?v=GCnQ9nvfLvY */}
       <iframe
-        className="p-2"
+        className="rounded-2xl"
         width="410"
         height="226"
         src="https://www.youtube.com/embed/GCnQ9nvfLvY"
@@ -77,9 +79,10 @@ function FirstPage() {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
-      <div className="text-xl p-2 mt-6">
+      <div className="text-xl mt-8">
         {/* a bit of prompt */}
-        watch this video and answer the question next to test your understanding!
+        Watch this video and answer the question next to test your
+        understanding!
       </div>
     </div>
   );

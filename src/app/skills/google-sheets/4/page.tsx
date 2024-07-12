@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { Navbar } from "@/components/ui/navbar";
 import { RevealList, RevealWrapper } from "next-reveal";
+import { ChevronRight } from "lucide-react";
 
 const story = [
   {
@@ -120,7 +121,7 @@ function StoryRenderer({ currentStory, onNext, setAnswer, answer }) {
         )}
       </AnimatePresence>
       <Button className="self-end" onClick={onNext}>
-        Next &gt;
+        Next <ChevronRight size={24} />
       </Button>
       {/* <Progress value={((currentStory + 1) / story.length) * 100}></Progress> */}
     </div>
