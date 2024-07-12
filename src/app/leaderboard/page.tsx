@@ -18,6 +18,7 @@ export default function Leaderboard() {
   const [currentRank, setCurrentRank] = useState(0);
   return (
     <main className="my-2 mx-4">
+        <RevealWrapper></RevealWrapper>
       <a className="text-bold" href={`/`}>&lt;</a>
       <div>
         <h1 className="text-bold text-2xl mx-2 my-2">Leaderboard</h1>
