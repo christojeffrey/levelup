@@ -26,42 +26,44 @@ export default function JobSkills({ params }: { params: { id: string } }) {
       <div className="flex-1">
         <Graph json={json} />
       </div>
-      <div className="flex gap-4 max-w-full overflow-x-scroll pl-4">
-        <Image
-          src="/badges/comm.png"
-          alt="internet"
-          className="object-contain"
-          width={76}
-          height={72}
-        />
-        <Image
-          src="/badges/internet.png"
-          alt="internet"
-          className="object-contain"
-          width={76}
-          height={72}
-        />
-        <Image
-          src="/badges/word.png"
-          alt="internet"
-          className="object-contain"
-          width={76}
-          height={72}
-        />
-        <Image
-          src="/badges/excel-before.png"
-          alt="internet"
-          className="object-contain"
-          width={76}
-          height={72}
-        />
-        <Image
-          src="/badges/writing-before.png"
-          alt="internet"
-          className="object-contain"
-          width={76}
-          height={72}
-        />
+      <div className="">
+        <div className="flex gap-4 max-w-full overflow-x-scroll p-6 fixed bottom-0">
+          <Image
+            src="/badges/excel-before.png"
+            alt="internet"
+            className="object-contain"
+            width={76}
+            height={72}
+          />
+          <Image
+            src="/badges/writing-before.png"
+            alt="internet"
+            className="object-contain"
+            width={76}
+            height={72}
+          />
+          <Image
+            src="/badges/comm.png"
+            alt="internet"
+            className="object-contain"
+            width={76}
+            height={72}
+          />
+          <Image
+            src="/badges/internet.png"
+            alt="internet"
+            className="object-contain"
+            width={76}
+            height={72}
+          />
+          <Image
+            src="/badges/word.png"
+            alt="internet"
+            className="object-contain"
+            width={76}
+            height={72}
+          />
+        </div>
       </div>
     </div>
   );
