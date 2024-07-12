@@ -104,9 +104,10 @@ export default function OnBoarding() {
 }
 
 function ThisOrThat({ onPrev, onDone }) {
+  const [selected, setSelected] = useState("");
   function handleClick() {
     console.log("clicked");
-    onDone();
+    setSelected("indoor");
   }
   return (
     <div className="relative flex-1 h-screen flex flex-col justify-between overflow-clip px-6 py-6">
@@ -121,21 +122,32 @@ function ThisOrThat({ onPrev, onDone }) {
         <h6 className="font-bold text-bw-darkest/50">Interests</h6>
         <h1 className="">Where would you prefer to work?</h1>
       </div>
-      <div className="flex justify-around h-full">
+      <div className="flex justify-between h-full gap-6 mt-24">
         <div
           className="bg-bw-light rounded-xl relative w-1/2 p-4 h-60 flex flex-col justify-center items-center border-bw-darkest/50 border-2 cursor-pointer"
-          onClick={handleClick}
+          onClick={() => setSelected("indoor")}
+          style={{ borderColor: selected === "indoor" ? "#3C7A6F" : "" }}
         >
           <Sofa className="" />
           <div className="absolute bottom-4 text-xl font-bold">Indoor</div>
         </div>
         <div
           className=" bg-bw-light rounded-xl relative w-1/2 p-4 h-60 flex flex-col justify-center items-center border-bw-darkest/50 border-2 cursor-pointer"
-          onClick={handleClick}
+          onClick={() => setSelected("outdoor")}
+          style={{ borderColor: selected === "outdoor" ? "#3C7A6F" : "" }}
         >
           <Tree className="" />
           <div className="absolute bottom-4 text-xl font-bold">Outdoor</div>
         </div>
+      </div>
+      <div className="flex w-full justify-between">
+        <Button variant="secondary" onClick={onPrev}>
+          <ChevronLeft className="mr-2 -ml-3" />
+          <p>Back</p>
+        </Button>
+        <Button onClick={onDone}>
+          <p>Next</p> <ChevronRight className="-mr-3 ml-2" />
+        </Button>
       </div>
       <div></div>
       <div></div>
