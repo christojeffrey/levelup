@@ -41,7 +41,7 @@ export default function JobSkills({ params }: { params: { id: string } }) {
           </p>
         </div>
       </div>
-      <div className="flex-1">
+      <div className="flex-1 z-10">
         <Graph json={json} />
       </div>
       <div className="flex gap-4 max-w-full overflow-x-scroll p-6 fixed bottom-0 border-t-2 border-bw-main">

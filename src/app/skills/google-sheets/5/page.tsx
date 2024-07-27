@@ -35,13 +35,13 @@ export default function Page() {
           return (
             <>
               <div className="">
-                <div>Question... 1 ?</div>
+                <div>If you want to add an add-ons in Google Sheets, how do you do it?</div>
                 {/* grid 2x2 */}
                 <div className="grid grid-cols-2 gap-4">
-                  <AnswerOption>a</AnswerOption>
-                  <AnswerOption onClick={handleDone}>b</AnswerOption>
-                  <AnswerOption>c</AnswerOption>
-                  <AnswerOption>d</AnswerOption>
+                  <AnswerOption>You can not add add-ons</AnswerOption>
+                  <AnswerOption onClick={handleDone}>Go to the add-ons tab and choose the add-ons we need</AnswerOption>
+                  <AnswerOption>Upload a file with an add-on installed</AnswerOption>
+                  <AnswerOption>Go to settings and download the file</AnswerOption>
                 </div>
               </div>
             </>
